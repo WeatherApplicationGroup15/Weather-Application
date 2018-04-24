@@ -4,9 +4,29 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+/**
+ * Used for the express() module.
+ * @type {Object}
+ */
 var app = express();
+
+
+/**
+ * builds a dictionary to be used for locations
+ * @type {Object}
+ */
 var dict = {};
+
+/**
+ * Build a list to save searched location
+ * @type {Array}
+ */
 var history = [];
+
+/**
+ * String used to log text.
+ * @type {String}
+ */
 var log_text = "";
 
 
@@ -16,6 +36,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static(__dirname + '/public'));
 
+
+/**
+ * used to access /public/ directory
+ * @type {[type]}
+ */
 var dpub = __dirname + '/public/'
 console.log(dpub)
 
@@ -38,9 +63,15 @@ app.post('/', function(request, response) {
     
 })
 
+
+/**
+ * Used for location
+ * @param  {String} location location searched for 
+ */
 function get_dict(location){
     get_location(location)
 };
+
 
 /**
  * Finds the location using Google Maps API.
@@ -55,7 +86,16 @@ function get_location(place){
     (error, response, body) => {
         if (body.status === "OK"){
             dict.location = place
+            /**
+             * Used to store latitude
+             * @type {String}
+             */
             var lat = (body.results[0].geometry["location"].lat);
+
+            /**
+             * Used to store longitue
+             * @type {String}
+             */
             var lng = (body.results[0].geometry["location"].lng);
             dict.lat = lat
             dict.lng = lng
@@ -67,6 +107,8 @@ function get_location(place){
     })
 
 }
+
+
 /**
  * Gets the weather and returns a dictionary with the weather information.
  * @param {string} lat - The latitude of the location.
@@ -86,6 +128,8 @@ function get_weather(lat, lng){
         }
     })
 }
+
+
 /**
  * Appends list into search.json.
  * @param {array} list - writes a list object into a json file.
@@ -93,6 +137,7 @@ function get_weather(lat, lng){
 function write_file(list){
         fs.writeFileSync("search.json", JSON.stringify(list)); 
 };
+
 
 /**
  * reads a Json file and returns it into a string
@@ -109,6 +154,6 @@ function read_file(){
 /**
  * makes the server accessable via an internet browser
  */
-app.listen(8080, () => {
+app.listen(8070, () => {
     console.log('server is up on port 8080');
 });
