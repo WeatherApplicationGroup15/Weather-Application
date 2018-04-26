@@ -154,6 +154,6 @@ function read_file(){
 /**
  * makes the server accessable via an internet browser
  */
-app.listen(8070, () => {
+app.listen(8080, () => {
     console.log('server is up on port 8080');
 });
