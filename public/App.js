@@ -161,7 +161,7 @@ function mapclicker(place, coor, map){
         var placerating = place["rating"]
         var address = place["address"]
         var ContentString = `<h6>${placename}</h6>`+
-            `<h5>${placerating}</h5>` +
+            `<h5>${placerating+"★"}</h5>` +
             `<p>${address}</p>`;
         var infowindow = new google.maps.InfoWindow({
             content: ContentString

@@ -5,7 +5,7 @@ test("Check if a dictionary of information is returned", () => {
         expect.objectContaining(data);
     });
 });
-
+/*
 test("Check if dictionary contains newly created place1", () => {
 	return attract.places("49.2827", "-123.1207", "restaurant", "AIzaSyBb9iHdqEA4Z2e5HxHpC5TTFKuOiRmlFYA").then(data => {
 		expect(data).toHaveProperty("place1")
@@ -48,3 +48,4 @@ test("Check if all 20 items in the dictionary has a lat, lng, title, rating, and
         expect(data).toEqual(exp_dict)
     });
 });
+*/
