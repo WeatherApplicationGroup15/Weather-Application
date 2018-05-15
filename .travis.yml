@@ -1,4 +1,10 @@
 language: node_js
 node_js:
  - "node"
- 
+deploy:
+provider: pages
+skip-cleanup: true
+github-token: $91d975d9c375f6fe3cb89f4f98664b911d274777
+keep-history: true
+on:
+branch: master 
