@@ -43,11 +43,11 @@ module.exports.NewsHeading = function(city, key) {
  */
 function get_date(){
     var d = new Date()
-    var currmonth = d.getMonth() + 1
+    var currmonth = d.getMonth()
     var currday = d.getDate()
     var curryear = d.getFullYear()
     var prevmonth = d.getMonth()
-    if (currmonth == 1){
+    if (currmonth == 0){
         var prevmonth = 12
         var prevyear = curryear - 1
         return `&from=${prevyear}-${prevmonth}-1&to=${curryear}-${currmonth}-${currday}`

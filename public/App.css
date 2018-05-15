@@ -117,7 +117,7 @@
 
 body {
     background-color: white;
-    background-image: url("http://www.bhmpics.com/wallpapers/vancouver_city_night_blue_sky-1920x1080.jpg");
+    background-image: url("http://www.bhmpics.com/wallpapers/vancouver_city_night_blue_sky-1920x1080.jpg");  
     background-size: 135%;
 }
 
@@ -166,7 +166,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 }
 
 .attrBox:hover {
-    background-color: darkslategrey;
+    background-color: #3A4B53;
     color: white;
 }
 
@@ -199,4 +199,28 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 .mapOptions-form label:hover {
     background-color: lightblue;
+}
+
+#loadScreen{
+    height: 100%;
+    width: 100%;
+    z-index: 98;
+    top: 0px;
+    left: 0px;
+    background-color: #3A4B53;
+    position: absolute;
+    display: none;
+}
+
+#spinner{
+    content: url("https://editionsdelarose.com/wp-content/themes/edr/img/loading.gif");
+    z-index: 99;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    width: 10%;
+    height: auto;
 }

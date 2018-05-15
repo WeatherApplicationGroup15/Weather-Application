@@ -1,4 +1,16 @@
-
+/**
+ * Functions for turning the loading screen on and off.
+ */
+function load(){
+    document.getElementById("loadScreen").style.display = "block";
+    document.getElementById("news").style.display = "none";
+    document.getElementById("weather").style.display = "none";
+}
+function unload(){
+    document.getElementById("loadScreen").style.display = "none";
+    document.getElementById("news").style.display = "block";
+    document.getElementById("weather").style.display = "block";
+}
 
 /**
  * List of shortened month names
@@ -183,6 +195,8 @@ geo();
 $(function() {
     $('#sub').click(function(e) {
         e.preventDefault();
+        load();
+        setTimeout(unload, 3500);
         console.log('select_link clicked');
 
         /**
@@ -198,6 +212,8 @@ $(function() {
     $('#Searchbox').keypress(function(e) {
         if(e.which == 13) {
             e.preventDefault();
+            load();
+            setTimeout(unload, 3500);
             console.log('select_link clicked');
 
             /**
@@ -266,7 +282,6 @@ function loadinfo(returned) {
     document.getElementById("weather").innerHTML = returned.requested["summary"]
     document.getElementById("lat").innerHTML = returned.requested["lat"]
     document.getElementById("lng").innerHTML = returned.requested["long"]
-
 }
 
 /**
