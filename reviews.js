@@ -9,6 +9,14 @@ const ReviewSchema = mongoose.Schema({
     date: String
 })
 
+
+/**
+ * Function used for mongoose database.
+ * @param  {[type]} dict   [description]
+ * @param  {[type]} uri    [description]
+ * @param  {[type]} action [description]
+ * @return {[type]}        [description]
+ */
 module.exports.database=function(dict, uri, action){
 //function database(dict, uri, action){
     return new Promise((resolve, reject) =>{
@@ -83,6 +91,12 @@ database(coor, uri, "find").then((item)=>{
 })
 */
 
+
+/**
+ * Function used that lets the user add a review to the point of interest selected.
+ * @param {string} entry review the user can make
+ * @param {string} model point of interest selected
+ */
 function add_review(entry, model){
     return new Promise((resolve, reject)=>{
         entry.save(function(err, info){
@@ -92,6 +106,13 @@ function add_review(entry, model){
     })
 }
 
+
+/**
+ * Function used to lookup a point of interest with a user review.
+ * @param  {string} model      Point of interest the user can review
+ * @param  {string} searchcoor Coordinates of the point of interest
+ * @return {object}            Contains all the info used to look up a point of interest
+ */
 function lookup(model, searchcoor){
     var searchcoor2 = JSON.stringify(searchcoor["coor"])
     return new Promise((resolve, reject)=>{
@@ -102,6 +123,12 @@ function lookup(model, searchcoor){
     })
 }
 
+
+/**
+ * Finds all the points of interest with a user review.
+ * @param  {[type]} model [description]
+ * @return {[type]}       [description]
+ */
 function findall(model){
     return new Promise((resolve, reject)=>{
         model.find(function(err,info){

@@ -16,13 +16,13 @@ var uri = "mongodb+srv://Website:Gundam123@weatherhistory-cw0lw.mongodb.net/test
 const keys = get_keys()
 /**
  * Variable used to use express() module
- * @type {Objext}
+ * @type {Object}
  */
 var app = express();
 
 /**
  * Variable used to store search history
- * @type {Array}
+ * @type {(string|Array.)}
  */
 var history = [];
 
@@ -39,8 +39,8 @@ app.use(express.static(__dirname + '/public'));
 
 
 /**
- * Variable used to store /public/ directory
- * @type {[type]}
+ * Variable used to access the /public/ directory.
+ * @type {string}
  */
 var dpub = __dirname + '/public/'
 
@@ -69,7 +69,16 @@ app.post('/', function(request, response) {
     
 })
 
-
+/**
+ * Functions to request all the info that is needed to build the BCITours website.
+ * Each is a promise function that retrieves a separate piece of data. 
+ * One is for obtaining the location searched for, one is for changing the picture shown 
+ * on the background, one is to obtain the news that are going to be shown, and one for
+ * obtaining the 5-day weather forecast of the place that was searched.
+ * @param  {object} request  used to call promises
+ * @param  {object} response the response to the promises called
+ * @return {(string|Array.)}  Several info is returned, all of it is used to built the website.
+ */
 function promise_hell(request, response){
     var returning_data = {}
     var location = request.body["location"]
@@ -111,14 +120,15 @@ function promise_hell(request, response){
 
 /**
  * Appends list into search.json.
- * @param {array} list - writes a list object into a json file.
+ * @param {(string|Array.)} list - writes a list object into a json file.
  */
 function write_file(list) {
     fs.writeFileSync("search.json", JSON.stringify(list));
 };
 
 /**
- * reads a Json file and returns it into a string
+ * Reads the json file containing the API keys used in the website
+ * @return {(string|Array.)} Array containing all the API keys used.
  */
 function get_keys() {
     file = fs.readFileSync("Apikeys.json")
@@ -130,7 +140,7 @@ function callback_hell(){
 }
 
 /**
- * makes the server accessable via an internet browser
+ * Makes the server accessable via an internet browser.
  */
 app.listen(8080, () => {
     console.log('server is up on port 8080');

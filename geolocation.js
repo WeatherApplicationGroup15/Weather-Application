@@ -1,8 +1,10 @@
 const request = require('request')
 
 /**
- * Finds the location using Google Maps API.
- * @param {string} place - represents the coordinates of a location.
+ * Find the location searched for used google API.
+ * @param  {string} place the location that will be obtained
+ * @param  {string} key   google API key used to obtain location
+ * @return {object}       contains all the info needed to obtain the location info
  */
 module.exports.get_location = function(place, key) {
     var dict = {}
