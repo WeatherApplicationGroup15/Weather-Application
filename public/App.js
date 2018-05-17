@@ -122,7 +122,9 @@ function load_attract(dict) {
             var coordict = {query:{coor:{latitude: lati, longitude: longi}}, task:"get_ratings"}
             var ContentString = `<h6>${placename}</h6>`+
                 `<h5>${placerating+"★"}</h5>` +
-                `<p>${address}</p>`;
+                `<p>${address}</p>` +
+                "<button>Post Review</button>"
+                ;
             var marker = new google.maps.Marker({
                 position: {lat: lati, lng: longi},
                 map: map,
@@ -352,6 +354,14 @@ function load_weather(dict){
         }
         document.getElementById("w_date" + day).innerHTML = dayList[weekday] + ", "+ monthList[w_month.getMonth()] + " " + (w_date.getDate() + day-1)
     }
+}
+
+function load_reviews(dict){
+    console.log("hello")
+}
+
+function review_post_window(dict){
+    
 }
 
 
