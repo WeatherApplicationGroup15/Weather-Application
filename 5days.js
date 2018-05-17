@@ -1,10 +1,10 @@
 const request = require('request');
 
 /**
- * Builds 5 day forecast
- * @param  {String} location Location to obtain weather for
- * @param  {String} key      API Key used
- * @return {Dictionary}          Build up dictionary with all info needed.
+ * Function used to obtain a 5 day weather forecast based on the location that was searched for.
+ * @param  {string} location user searched location for which the 5 day weather forecast will be obtained
+ * @param  {sting} key      World weather online API key, used to obtain the 5 day weather forecast
+ * @return {object}          Contains all the info to show the 5 day forecast
  */
 module.exports.forecast5days = function(location, key){
     var dict = {}

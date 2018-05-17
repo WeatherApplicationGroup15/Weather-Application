@@ -72,8 +72,9 @@
 }
 
 #Searchbox {
-    width: 65%;
-    background-color: grey !important;
+
+    width: 75%;
+    background-color: #D3D3D3 !important;
 }
 
 .dropButton {
