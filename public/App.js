@@ -362,12 +362,20 @@ function load_weather(dict){
 
 
 /**
- * refreshes the map
+ * refreshes the searchbar
  */
-
 sub = document.getElementById("sub")
+navbar = document.getElementById("navbar")
+searchbar = document.getElementById("Searchbox")
+bgOut = document.getElementById("bgNav")
 sub.addEventListener("click", function() {
     msg.innerHTML = ""
+    if(searchbar.value.length > 0) {
+        navbar.style.top = 0;
+        navbar.style.transition = "top 1s";
+        bgOut.style.backgroundColor = "rgba(0,0,255,0)"
+        bgOut.style.transition = "background-color 1000ms linear" 
+    }
 })
 
 //borrowed from w3schools for initial layout

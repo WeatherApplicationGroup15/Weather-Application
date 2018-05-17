@@ -71,9 +71,18 @@
     width: 40px;
 }
 
+#navbar {
+    top: 50vh;
+}
+
+#bgNav {
+    background-color: pink;
+    height: 100vh;
+}
+
 #Searchbox {
     width: 75%;
-    background-color: grey !important;
+    background-color: #D3D3D3 !important;
 }
 
 .dropButton {
