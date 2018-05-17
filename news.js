@@ -41,7 +41,7 @@ module.exports.NewsHeading = function(city, key) {
 
 /**
  * Used to obtain the date to be shown
- * @return {(string|Array.)} String array containing the date info.
+ * @return {array} String array containing the date info.
  */
 function get_date(){
     var d = new Date()
