@@ -123,7 +123,7 @@ function load_attract(dict) {
             var ContentString = `<h6>${placename}</h6>`+
                 `<h5>${placerating+"★"}</h5>` +
                 `<p>${address}</p>` +
-                "<button>Post Review</button>"
+                "<button id=\"openReview\">Post Review</button>"
                 ;
             var marker = new google.maps.Marker({
                 position: {lat: lati, lng: longi},
@@ -451,3 +451,15 @@ function get_radial(){
         return("restaurant")
     }
 }
+
+closeRev = document.getElementById("cancelButton")
+reviewBG = document.getElementById("reviewBG")
+closeRev.addEventListener("click", function(){
+    reviewBG.style.display = "none"
+})
+
+openReview = document.getElementById("sides")
+openReview.addEventListener("click", function(){
+    console.log("hello")
+    reviewBG.style.display = "block"
+})

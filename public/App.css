@@ -72,6 +72,7 @@
     width: 20vw;
     height: 50vh;
     z-index: 1;
+    display: none;
 }
 
 #reviewBox {
@@ -107,7 +108,7 @@
     left: 0px;
     background-color: #3A4B53;
     position: absolute;
-    display: none;
+    display: block;
 }
 
 #navbar {
