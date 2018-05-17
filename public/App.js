@@ -366,12 +366,30 @@ function review_post_window(dict){
 
 
 /**
- * refreshes the map
+ * refreshes the searchbar
  */
-
 sub = document.getElementById("sub")
+navbar = document.getElementById("navbar")
+searchbar = document.getElementById("Searchbox")
+outerdiv = document.getElementById("outerdiv")
 sub.addEventListener("click", function() {
     msg.innerHTML = ""
+    if(searchbar.value.length > 0) {
+        navbar.style.top = 0;
+        navbar.style.transition = "top 1s";
+        outerdiv.style.display = "none";
+    }
+})
+
+searchbar.addEventListener("keypress", function(ev) {
+    if(ev.keyCode == 13) {
+        msg.innerHTML = ""
+        if(searchbar.value.length > 0) {
+            navbar.style.top = 0;
+            navbar.style.transition = "top 1s";
+            outerdiv.style.display = "none";
+        }
+    }
 })
 
 //borrowed from w3schools for initial layout

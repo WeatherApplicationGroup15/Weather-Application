@@ -51,7 +51,7 @@ app.get('/', (request, response) => {
 });
 //
 app.post('/', function(request, response) {
-    console.log(request.body.task)
+    console.log(request.body)
     if(request.body.task === "find"){
         promise_hell(request, response)
     }
