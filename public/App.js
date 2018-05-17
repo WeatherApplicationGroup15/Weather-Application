@@ -433,3 +433,41 @@ function get_radial(){
         return("restaurant")
     }
 }
+
+setInterval(FilterText,5);
+
+/**
+ * Function to change filter text depending on what's selected.
+ */
+function FilterText(){
+    if (document.getElementById("AP").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Amusement Parks ⯆";
+    }
+    else if (document.getElementById("AQ").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Aquariums ⯆";
+    }
+    else if (document.getElementById("AG").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Art Galleries ⯆";
+    }
+    else if (document.getElementById("CAS").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Casinos ⯆";
+    }
+    else if (document.getElementById("MM").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Mueseums ⯆";
+    }
+    else if (document.getElementById("NC").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Night Clubs ⯆";
+    }
+     else if (document.getElementById("Park").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Parks ⯆";
+    }
+    else if (document.getElementById("SM").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Shopping Malls ⯆";
+    }
+    else if (document.getElementById("Zoo").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Zoos ⯆";
+    }
+    else if (document.getElementById("Res").checked == true){
+        document.getElementById("searchFilter").innerHTML = "Restaurants ⯆";
+    }
+}
