@@ -61,6 +61,34 @@
     text-align: center;
 }
 
+#reviewBG {
+    background-color: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 20vw;
+    height: 50vh;
+    z-index: 1;
+}
+
+#reviewBox {
+    position: relative;
+    background-color: pink;
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+    display: block;
+    text-align: center;
+    
+}
+
+#reviewinput {
+    height: 30%;
+}
+
 #logo {
     position: relative;
     height: 40px;
@@ -69,6 +97,17 @@
     display: inline-block;
     margin: 10px 0;
     width: 40px;
+}
+
+#outerdiv {
+    height: 200%;
+    width: 100%;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    background-color: #3A4B53;
+    position: absolute;
+    display: none;
 }
 
 #navbar {

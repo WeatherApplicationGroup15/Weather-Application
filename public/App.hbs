@@ -14,8 +14,22 @@
         <div id="loadScreen">
             <img id="spinner">
         </div>
+
+        <!--review box-->
+        <div id="reviewBG" class="w3-card">
+            <div id="reviewBox">
+                <h1>REVIEW</h1>
+                <a id="authorText">-Author-</a><br>
+                <input id="author" autocomplete="off" type="text"><br>
+                <a id="reviewinput">-Review-</a><br>
+                <textarea id="reviewinput" autocomplete="off"></textarea><br><br>
+                <button>Submit</button>
+                <button>Cancel</button>
+            </div>            
+        </div>
         
         <!-- Navbar -->
+        <div id="outerdiv"></div>
         <div id="navbar" class="w3-top header">
             <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
                 <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
@@ -51,6 +65,7 @@
                 <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="sub">⌕ Search</a>
             </div>
         </div>
+        
 
         <!--move this to be behind the map and animated when error occurs-->
         <div id="msg"></div>
