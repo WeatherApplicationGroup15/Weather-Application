@@ -1,4 +1,16 @@
-
+/**
+ * Functions for turning the loading screen on and off.
+ */
+function load(){
+    document.getElementById("loadScreen").style.display = "block";
+    document.getElementById("news").style.display = "none";
+    document.getElementById("weather").style.display = "none";
+}
+function unload(){
+    document.getElementById("loadScreen").style.display = "none";
+    document.getElementById("news").style.display = "block";
+    document.getElementById("weather").style.display = "block";
+}
 
 /**
  * List of shortened month names
@@ -14,9 +26,9 @@ var dayList = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
 
 /**
  * geo weather
- *Fuction that changes the homeloc div.
- *If the it is able to get the cordinates of the user then it will send it to the temp and summary div
- *Else it will say an error message if an error occurs
+ * Fuction that changes the homeloc div.
+ * If the it is able to get the cordinates of the user then it will send it to the temp and summary div
+ * Else it will say an error message if an error occurs
  */
 function geo() {
     /**
@@ -65,68 +77,19 @@ function theMap(lati, longi) {
         mapTypeControl: false,
         zoomControl: true
     });
-
-    var marker = new google.maps.Marker({
-    position: {lat: lati, lng: longi},
-    map: map,
-    });
-
-
-    // ALL THE STUFF BELOW ARE TEMPORARY AND HARDCODED TESTS
-    //temp marker 1
-    var marker1 = new google.maps.Marker({
-    position: {lat: 51.5040727, lng: -0.1784748},
-    map: map,
-    });
-
-    var infowindow = new google.maps.InfoWindow({
-      content: "TESTING"
-    });
-
-    // Custom icons for markers
-    // Switchable between mouseover and mouseout
-
-    // Example:
-    /* var icon2 = "feelsgoodman.png";
-
-    google.maps.event.addListener(marker1, 'mouseover', function() {
-      marker1.setIcon(icon2);
-    });
-
-    */
-    
-    // Somehow need to create a list to iterate containing all the infowindows
-    // Reference: https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
-    marker1.addListener('click', function() {
-      infowindow.open(map, marker1)
-    });
-
-    //temp marker 2
-    var marker = new google.maps.Marker({
-    position: {lat: 51.4880927, lng: -0.1383774},
-    map: map,
-    });
-
-    //temp marker 3
-    var marker = new google.maps.Marker({
-    position: {lat: 51.4937705, lng: -0.1098964},
-    map: map,
-    });
-
-
 }
 
 /**
  * Function that builds the map using latitude and longitude of the attractions
+ * Also loads the attraction dictionary.
  * @param  {[type]} dict used to retrieve lat/lng for each place
  * @return {[type]}       [description]
+ * @param  {Array} dict List of the attractions
  */
-function addMarker(dict) {
+function load_attract(dict) {
     var min = 1, max = Object.keys(dict).length
-
     var lati = dict.place1.geometry["lat"],
         longi = dict.place1.geometry["lng"]
-
     var map = new google.maps.Map(document.getElementById('mapbox'), {
         center: {lat: lati, lng: longi},
         zoom: 13,
@@ -136,40 +99,92 @@ function addMarker(dict) {
         mapTypeControl: false,
         zoomControl: true
     });
+    var infowindow = new google.maps.InfoWindow()
+    document.getElementById("attract").innerHTML = ""
+    reset_attr()
+
+    /*
+    Custom icons for markers
+    Switchable between mouseover and mouseout
+    */
+    Example:
+    var icon1 = "imgs/marker1s.png"
+    var icon2 = "imgs/marker2s.png";
 
     for(var i=min; i<max+1; i++) {
-        var place = dict["place"+i]
-        lati = place.geometry["lat"]
-        longi = place.geometry["lng"]
-        var marker = new google.maps.Marker({
-            position: {lat: lati, lng: longi},
-            map: map,
-        });
-        /*
-        var infowindow = new google.maps.InfoWindow({
-            content: "You have clicked " + i
-          });
-          */
-        google.maps.event.addListener(marker, "click",mapclicker(place, marker.getPosition(), map))
-    }
+        (function(){
+            var place = dict["place"+i]
+            lati = place.geometry["lat"]
+            longi = place.geometry["lng"]
+            var placename = place["title"]
+            var placerating = place["rating"]
+            var address = place["address"]
+            var coordict = {query:{coor:{latitude: lati, longitude: longi}}, task:"get_ratings"}
+            var ContentString = `<h6>${placename}</h6>`+
+                `<h5>${placerating+"★"}</h5>` +
+                `<p>${address}</p>`;
+            var marker = new google.maps.Marker({
+                position: {lat: lati, lng: longi},
+                map: map,
+                contentString: ContentString,
+            });
 
+            marker.setIcon(icon1)
+
+            google.maps.event.addListener(marker, 'mouseover', function() {
+                marker.setIcon(icon2);
+            });
+
+            google.maps.event.addListener(marker, 'mouseout', function() {
+                marker.setIcon(icon1);
+            })
+
+            var ndiv = document.createElement("div")
+            ndiv.setAttribute("id","attr"+i)
+            ndiv.className = "attrBox"
+            ndiv.innerHTML = "<b>" + placename + "</b> <br> " + address
+            document.getElementById("attract").appendChild(ndiv)
+
+            document.getElementById("attr"+i).addEventListener('click', function(){
+                marker.setIcon(icon2);
+                reviews_ajax(coordict).then((msg)=>{
+                  console.log(msg)
+                })
+                infowindow.setContent(ContentString);
+                infowindow.open(map, marker);
+                map.setCenter(marker.position)
+                map.setZoom(17);
+                
+            })
+
+            google.maps.event.addListener(marker, 'click', function(){
+                marker.setIcon(icon2);
+                reviews_ajax(coordict).then((msg)=>{
+                  console.log(msg)
+                })
+                infowindow.setContent(this.contentString);
+                infowindow.open(map, this);
+                map.setCenter(this.position)
+                
+            })
+
+            google.maps.event.addListener(infowindow, 'closeclick', function(){
+               marker.setIcon(icon1)
+            });
+        }());
+
+    }
+};
+
+function reset_attr(){
+    var ndiv = document.createElement("h2")
+    ndiv.className = "el-head"
+    ndiv.innerHTML= "List of Attractions"
+    document.getElementById("attract").appendChild(ndiv)
 }
 
-function mapclicker(place, coor, map){
-    return function(){
-        var placename = place["title"]
-        var placerating = place["rating"]
-        var address = place["address"]
-        var ContentString = `<h6>${placename}</h6>`+
-            `<h5>${placerating+"★"}</h5>` +
-            `<p>${address}</p>`;
-        var infowindow = new google.maps.InfoWindow({
-            content: ContentString
-        });
-        infowindow.setPosition(coor)
-        infowindow.open(map)
-    }
-}
+
+// Function calls
 
 geo();
 
@@ -183,37 +198,41 @@ geo();
 $(function() {
     $('#sub').click(function(e) {
         e.preventDefault();
+        load();
+        setTimeout(unload, 3500);
         console.log('select_link clicked');
 
         /**
          * Gets value from searchbox to search for location
          * @type {Object}
          */
-        var search = {}
+        var search = {task:"find"}
         search.location = $('#Searchbox').val();
         search.filter = get_radial()
-        ajax(search)
+        location_search_ajax(search)
     })
 
     $('#Searchbox').keypress(function(e) {
         if(e.which == 13) {
             e.preventDefault();
+            load();
+            setTimeout(unload, 3500);
             console.log('select_link clicked');
 
-            /**
+            /*
              * Gets value from searchbox to search for location
              * @type {Object}
              */
-            var search = {}
+            var search = {task:"find"}
             search.location = $('#Searchbox').val();
             search.filter = get_radial()
             console.log(search)
-            ajax(search)
+            location_search_ajax(search)
         }
     })
 })
 
-function ajax(search){
+function location_search_ajax(search){
     $.ajax({
             type: 'POST',
             data: JSON.stringify(search),
@@ -237,18 +256,23 @@ function ajax(search){
     })
 }
 
-function ajax_place(search){
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(search),
-        contentType: 'application/json',
-        url: 'http://localhost:8080/',
-        success: function(data){
-            console.log("successfully got review data")
-            var returned = JSON.parse(data)
-            console.log(returned)
-        }
+function reviews_ajax(search){
+    // search must be formatted as
+    // {coor: {latitude: lat, longitude, long}}
+    return new Promise((resolve)=>{
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(search),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/',
+            success: function(data){
+                console.log("successfully got review data")
+                var returned = JSON.parse(data)
+                resolve(returned)
+            }
+        })
     })
+
 }
 
 /**
@@ -266,7 +290,6 @@ function loadinfo(returned) {
     document.getElementById("weather").innerHTML = returned.requested["summary"]
     document.getElementById("lat").innerHTML = returned.requested["lat"]
     document.getElementById("lng").innerHTML = returned.requested["long"]
-
 }
 
 /**
@@ -276,35 +299,6 @@ function loadinfo(returned) {
 function load_bg(background) {
     document.body.style.backgroundImage = "url("+background+")";
 }
-
-
-/**
- * Function that loads the attraction dictionary.
- * @param  {Array} dict List of the attractions
- */
-function load_attract(dict) {
-    document.getElementById("attract").innerHTML = ""
-    reset_attr()
-    addMarker(dict)
-    var dict_length = Object.keys(dict).length
-    for(var i=1; i < dict_length+1; i++){
-        var ndiv = document.createElement("div")
-        ndiv.setAttribute("id","attr"+i)
-        ndiv.className = "attrBox"
-        ndiv.innerHTML = "<b>" + dict["place"+i]["title"] +  "</b> <br> " +  dict["place"+i]["address"]
-        document.getElementById("attract").appendChild(ndiv)
-    }
-    /**
-     * Resets the attraction list
-     */
-    function reset_attr(){
-        var ndiv = document.createElement("h2")
-        ndiv.className = "el-head"
-        ndiv.innerHTML= "List of Attractions"
-        document.getElementById("attract").appendChild(ndiv)
-    }
-}
-
 
 /**
  * Function to load the list of news related to the place searched for
@@ -367,14 +361,21 @@ function load_weather(dict){
 sub = document.getElementById("sub")
 navbar = document.getElementById("navbar")
 searchbar = document.getElementById("Searchbox")
-bgOut = document.getElementById("bgNav")
 sub.addEventListener("click", function() {
     msg.innerHTML = ""
     if(searchbar.value.length > 0) {
         navbar.style.top = 0;
         navbar.style.transition = "top 1s";
-        bgOut.style.backgroundColor = "rgba(0,0,255,0)"
-        bgOut.style.transition = "background-color 1000ms linear" 
+    }
+})
+
+searchbar.addEventListener("keypress", function(ev) {
+    if(ev.keyCode == 13) {
+        msg.innerHTML = ""
+        if(searchbar.value.length > 0) {
+            navbar.style.top = 0;
+            navbar.style.transition = "top 1s";
+        }
     }
 })
 

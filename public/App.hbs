@@ -8,45 +8,49 @@
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
+    
     <body>
+        <!--Load screen div-->
+        <div id="loadScreen">
+            <img id="spinner">
+        </div>
+        
         <!-- Navbar -->
-        <div id="bgNav">
-            <div id="navbar" class="w3-top header">
-                <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-                    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-                    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="sides">BCITour</a>
-                    <input type="text" id="Searchbox" class="w3-bar-item w3-padding-large w3-theme-d4 w3-theme-d4" placeholder="Search" name="City">
-                    <div id="mapOptions" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-                        <button class="dropButton">⯆</button>
-                        <div class="mapOptions-content">
-                            <form class="mapOptions-form">
-                                <input id="AP" type="radio" name="place" value="AP">
-                                <label for="AP">Amusement Park</label><br>
-                                <input id="AQ" type="radio" name="place" value="AQ">
-                                <label for="AQ">Aquarium</label><br>
-                                <input id="AG" type="radio" name="place" value="AG">
-                                <label for="AG">Art Gallery</label><br>
-                                <input id="CAS" type="radio" name="place" value="CAS">
-                                <label for="CAS">Casino</label><br>
-                                <input id="MM" type="radio" name="place" value="MM">
-                                <label for="MM">Museum</label><br>
-                                <input id="NC" type="radio" name="place" value="NC">
-                                <label for="NC">Night Club</label><br>
-                                <input id="Park" type="radio" name="place" value="Park">
-                                <label for="Park">Park</label><br>
-                                <input id="SM" type="radio" name="place" value="SM">
-                                <label for="SM">Shopping Mall</label><br>
-                                <input id="Zoo" type="radio" name="place" value="Zoo">
-                                <label for="Zoo">Zoo</label><br>
-                                <input id="Res" type="radio" name="place" value="Res"checked>
-                                <label for="Res">Restaurant</label><br>
-                            </form>
-                        </div>
+        <div id="navbar" class="w3-top header">
+            <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+                <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="sides">BCITour</a>
+                <input type="text" id="Searchbox" class="w3-bar-item w3-padding-large w3-theme-d4 w3-theme-d4" placeholder="Search" name="City">
+                <div id="mapOptions" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                    <button class="dropButton">⯆</button>
+                    <div class="mapOptions-content">
+                        <form class="mapOptions-form">
+                            <input id="AP" type="radio" name="place" value="AP">
+                            <label for="AP">Amusement Park</label><br>
+                            <input id="AQ" type="radio" name="place" value="AQ">
+                            <label for="AQ">Aquarium</label><br>
+                            <input id="AG" type="radio" name="place" value="AG">
+                            <label for="AG">Art Gallery</label><br>
+                            <input id="CAS" type="radio" name="place" value="CAS">
+                            <label for="CAS">Casino</label><br>
+                            <input id="MM" type="radio" name="place" value="MM">
+                            <label for="MM">Museum</label><br>
+                            <input id="NC" type="radio" name="place" value="NC">
+                            <label for="NC">Night Club</label><br>
+                            <input id="Park" type="radio" name="place" value="Park">
+                            <label for="Park">Park</label><br>
+                            <input id="SM" type="radio" name="place" value="SM">
+                            <label for="SM">Shopping Mall</label><br>
+                            <input id="Zoo" type="radio" name="place" value="Zoo">
+                            <label for="Zoo">Zoo</label><br>
+                            <input id="Res" type="radio" name="place" value="Res"checked>
+                            <label for="Res">Restaurant</label><br>
+                        </form>
                     </div>
-                    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="sub">⌕ Search</a>
                 </div>
+                <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="sub">⌕ Search</a>
             </div>
-        </div><!--bgnav-->
+        </div>
 
         <!--move this to be behind the map and animated when error occurs-->
         <div id="msg"></div>

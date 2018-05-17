@@ -1,4 +1,10 @@
 language: node_js
 node_js:
  - "node"
- 
+deploy:
+provider: pages
+skip-cleanup: true
+github-token: $TravisCIWeather
+keep-history: true
+on:
+branch: master 
