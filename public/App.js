@@ -208,7 +208,7 @@ $(function() {
          * Gets value from searchbox to search for location
          * @type {Object}
          */
-        var search = {}
+        var search = {task:"find"}
         search.location = $('#Searchbox').val();
         search.filter = get_radial()
         location_search_ajax(search)
