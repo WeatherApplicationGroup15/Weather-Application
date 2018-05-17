@@ -1,7 +1,9 @@
 const request = require("request");
+
 /**
- * Gets top news about the location using the News API.
- * @param {string} city - city in with news is about.
+ * Used to obtain and display news related to the location that was searched for.
+ * @param {string} city location searched for 
+ * @param {string} key  API key used to obtain the related news
  */
 module.exports.NewsHeading = function(city, key) {
     var dict_title = {}
@@ -38,8 +40,8 @@ module.exports.NewsHeading = function(city, key) {
 }
 
 /**
- * Used to get the date for news
- * @return {String} returns the date
+ * Used to obtain the date to be shown
+ * @return {array} String array containing the date info.
  */
 function get_date(){
     var d = new Date()
