@@ -9,6 +9,9 @@ const news = require("./news.js")
 const forecast = require("./5days.js")
 const pixabay = require("./pixabay.js")
 const places = require("./attract.js")
+const reviews = require("./reviews.js")
+
+var uri = "mongodb+srv://Website:Gundam123@weatherhistory-cw0lw.mongodb.net/test?retryWrites=true";
 
 const keys = get_keys()
 /**
@@ -48,6 +51,26 @@ app.get('/', (request, response) => {
 });
 //
 app.post('/', function(request, response) {
+    console.log(request.body.task)
+    if(request.body.task === "find"){
+        promise_hell(request, response)
+    }
+    else if (request.body.task === "get_ratings"){
+        //response.send(JSON.stringify({message: "this worked"}))
+        //console.log(request.body.query)
+        reviews.database(request.body.query, uri, "find").then((data)=>{
+            response.send(JSON.stringify(data))
+        })
+    }
+    else if (request.body.task === "post_rating"){
+        console.log("rating posted")
+    }
+
+    
+})
+
+
+function promise_hell(request, response){
     var returning_data = {}
     var location = request.body["location"]
     var filter = request.body["filter"]
@@ -80,10 +103,10 @@ app.post('/', function(request, response) {
             }, (error) => {
                 response.send(JSON.stringify(error))
             })
-        })
-    
-})
-
+        ,(error)=>{
+            console.log(error)
+        }})
+}
 
 
 /**
@@ -100,6 +123,10 @@ function write_file(list) {
 function get_keys() {
     file = fs.readFileSync("Apikeys.json")
     return JSON.parse(file)
+}
+
+function callback_hell(){
+    
 }
 
 /**

@@ -153,6 +153,7 @@ function addMarker(dict) {
         var place = dict["place"+i]
         lati = place.geometry["lat"]
         longi = place.geometry["lng"]
+        var coordict = {query:{coor:{latitude: lati, longitude: longi}}, task:"get_ratings"}
         var marker = new google.maps.Marker({
             position: {lat: lati, lng: longi},
             map: map,
@@ -162,13 +163,14 @@ function addMarker(dict) {
             content: "You have clicked " + i
           });
           */
-        google.maps.event.addListener(marker, "click",mapclicker(place, marker.getPosition(), map))
+        google.maps.event.addListener(marker, "click", mapclicker(place, marker.getPosition(), map, coordict))
     }
 
 }
 
-function mapclicker(place, coor, map){
+function mapclicker(place, coor, map, coordict){
     return function(){
+        console.log(coordict)
         var placename = place["title"]
         var placerating = place["rating"]
         var address = place["address"]
@@ -178,6 +180,9 @@ function mapclicker(place, coor, map){
         var infowindow = new google.maps.InfoWindow({
             content: ContentString
         });
+        reviews_ajax(coordict).then((msg)=>{
+            console.log(msg)
+        })
         infowindow.setPosition(coor)
         infowindow.open(map)
     }
@@ -206,7 +211,7 @@ $(function() {
         var search = {}
         search.location = $('#Searchbox').val();
         search.filter = get_radial()
-        ajax(search)
+        location_search_ajax(search)
     })
 
     $('#Searchbox').keypress(function(e) {
@@ -216,20 +221,20 @@ $(function() {
             setTimeout(unload, 3500);
             console.log('select_link clicked');
 
-            /**
+            /*
              * Gets value from searchbox to search for location
              * @type {Object}
              */
-            var search = {}
+            var search = {task:"find"}
             search.location = $('#Searchbox').val();
             search.filter = get_radial()
             console.log(search)
-            ajax(search)
+            location_search_ajax(search)
         }
     })
 })
 
-function ajax(search){
+function location_search_ajax(search){
     $.ajax({
             type: 'POST',
             data: JSON.stringify(search),
@@ -253,18 +258,23 @@ function ajax(search){
     })
 }
 
-function ajax_place(search){
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(search),
-        contentType: 'application/json',
-        url: 'http://localhost:8080/',
-        success: function(data){
-            console.log("successfully got review data")
-            var returned = JSON.parse(data)
-            console.log(returned)
-        }
+function reviews_ajax(search){
+    // search must be formatted as
+    // {coor: {latitude: lat, longitude, long}}
+    return new Promise((resolve)=>{
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(search),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/',
+            success: function(data){
+                console.log("successfully got review data")
+                var returned = JSON.parse(data)
+                resolve(returned)
+            }
+        })
     })
+
 }
 
 /**
