@@ -39,7 +39,7 @@
     top: 75%;
     left: 2.5%;
     width: 25%;
-    height: 70%;
+    height: 65vh;
     z-index: 0;
 }
 
@@ -48,16 +48,17 @@
     top: 75%;
     left: 30%;
     width: 67.5%;
-    height: 80%;
+    height: 65vh;
     z-index: 0;
 }
 
 #slideshow {
+    position: relative;
     margin: auto;
     left: 0;
     right: 0;
-    width: 80%;
-    height: 100%;
+    width: 60vw;
+    height: auto;
     text-align: center;
 }
 
@@ -117,8 +118,7 @@
 }
 
 #Searchbox {
-
-    width: 75%;
+    width: 60%;
     background-color: #D3D3D3 !important;
 }
 
@@ -175,25 +175,34 @@ body {
 
 #title1, #title2, #title3, #title4, #title5 {
     position: relative;
-    font-size: 30px;
+    font-size: 150%;
     font-weight: bold;
     text-decoration: none;
+    top: 0;
+    left: 0;
+    height: 40vh;
+    width: auto;
+    object-fit: contain;
 }
 
 .titles {
+    position: relative;
     word-wrap: break-word;
 }
 
 #pic1, #pic2, #pic3, #pic4, #pic5 {
-    width: 50vw;
-    float: left;
+    position: relative;
+    width: 80vh;
+    height: auto;
+    object-fit: contain;
 }
 
 #myCard {
     position: relative;
     margin: auto;
     background: rgba(255,255,255,0.5);
-    height: 85%;
+    width: 50vw;
+    height: auto;
 }
 
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}   
@@ -203,7 +212,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 }
 
 #sub {
-    width: 10%
+    width: 15%
 }
 
 .attrBox {
@@ -231,7 +240,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     position: absolute;
     text-align: left;
     background-color: #f1f1f1;
-    min-width: 300px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
