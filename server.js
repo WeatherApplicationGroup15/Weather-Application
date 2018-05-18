@@ -51,19 +51,24 @@ app.get('/', (request, response) => {
 });
 //
 app.post('/', function(request, response) {
-    console.log(request.body)
+    console.log(request.body.task)
     if(request.body.task === "find"){
         promise_hell(request, response)
     }
     else if (request.body.task === "get_ratings"){
         //response.send(JSON.stringify({message: "this worked"}))
-        //console.log(request.body.query)
-        reviews.database(request.body.query, uri, "find").then((data)=>{
+        console.log(typeof request.body.query.coor["latitude"])
+
+        var realcoor = {coor:{}}
+        realcoor.coor.latitude = String(request.body.query.coor["latitude"])
+        realcoor.coor.longitude = String(request.body.query.coor["longitude"])
+        console.log(realcoor)
+        reviews.database(realcoor, uri, "find").then((data)=>{
             response.send(JSON.stringify(data))
         })
     }
     else if (request.body.task === "post_rating"){
-        console.log("rating posted")
+        reviews.database(request.body, uri, "add")
     }
 
     

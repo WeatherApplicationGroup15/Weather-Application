@@ -87,6 +87,7 @@ function theMap(lati, longi) {
  * @param  {Array} dict List of the attractions
  */
 function load_attract(dict) {
+    reset_attr()
     var min = 1, max = Object.keys(dict).length
     var lati = dict.place1.geometry["lat"],
         longi = dict.place1.geometry["lng"]
@@ -123,8 +124,8 @@ function load_attract(dict) {
             var ContentString = `<h6>${placename}</h6>`+
                 `<h5>${placerating+"★"}</h5>` +
                 `<p>${address}</p>` +
-                "<button>Post Review</button>"
-                ;
+                `<button onclick='show_rating_page(${lati},${longi})'>Post Review</button>`
+;
             var marker = new google.maps.Marker({
                 position: {lat: lati, lng: longi},
                 map: map,
@@ -178,11 +179,37 @@ function load_attract(dict) {
     }
 };
 
+function show_rating_page(latitude, longitude){
+    document.getElementById("reviewBG").style.display = "block";
+    document.getElementById("lat").innerHTML = latitude
+    document.getElementById("lng").innerHTML = longitude
+}
+
+
 function reset_attr(){
     var ndiv = document.createElement("h2")
     ndiv.className = "el-head"
     ndiv.innerHTML= "List of Attractions"
     document.getElementById("attract").appendChild(ndiv)
+}
+
+document.getElementById("submitButton").addEventListener("click", function(){
+    var requestdict = {task:"post_rating"}
+    var coordict = {latitude: document.getElementById("lat").innerHTML, longitude: document.getElementById("lng").innerHTML}
+    requestdict["coor"] = coordict
+    requestdict["author"] = document.getElementById("author").value
+    requestdict["review"] = document.getElementById("reviewinput").value
+    requestdict["date"] = get_date()
+    reviews_ajax(requestdict)
+})
+
+function get_date(){
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    newdate = year + "-" + month + "-" + day;
+    return(newdate)
 }
 
 
@@ -451,6 +478,23 @@ function get_radial(){
         return("restaurant")
     }
 }
+
+
+/**
+ * Buttons set up for the markers and reviewing section
+ */
+closeRev = document.getElementById("cancelButton")
+reviewBG = document.getElementById("reviewBG")
+closeRev.addEventListener("click", function(){
+    reviewBG.style.display = "none"
+})
+
+openReview = document.getElementById("sides")
+openReview.addEventListener("click", function(){
+    console.log("hello")
+    reviewBG.style.display = "block"
+})
+
 
 setInterval(FilterText,5);
 
