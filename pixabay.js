@@ -25,6 +25,7 @@ module.exports.city_background = function(place, key){
     })
 }
 
+
 /**
 pixabay('vancouver', 'YOUR KEY').then((dictionary) => {
     console.log(dictionary)
