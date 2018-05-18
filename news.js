@@ -26,10 +26,10 @@ module.exports.NewsHeading = function(city, key) {
                         temp += 1
                     }
                 } else {
-                    for (var i = 0; i < body.articles.length; i++) {
-                        dict_title[i] = body.articles[temp].title
-                        dict_url[i] = body.articles[temp].url
-                        dict_pic[i] = body.articles[temp].urlToImage
+                    for (var i = 0; i < 5; i++) {
+                        dict_title[i] = "No News Found"
+                        dict_url[i] = "No News"
+                        dict_pic[i] = "https://cdn0.iconfinder.com/data/icons/broken-1/24/crushed_fragile_Broken_Magnifying_Galss-128.png"
                         temp += 1
                     }
                 }

@@ -192,7 +192,7 @@ body {
 
 #pic1, #pic2, #pic3, #pic4, #pic5 {
     position: relative;
-    width: 80vh;
+    width: 15vw;
     height: auto;
     object-fit: contain;
 }
@@ -201,7 +201,7 @@ body {
     position: relative;
     margin: auto;
     background: rgba(255,255,255,0.5);
-    width: 50vw;
+    width: 40vw;
     height: auto;
 }
 
