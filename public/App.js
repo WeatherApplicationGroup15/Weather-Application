@@ -124,7 +124,7 @@ function load_attract(dict) {
             var ContentString = `<h6>${placename}</h6>`+
                 `<h5>${placerating+"★"}</h5>` +
                 `<p>${address}</p>` +
-                `<button onclick='show_rating_page(${lati},${longi})'>Post Review</button><br>`
+                `<button onclick='show_rating_page(${lati},${longi})'>Post Review</button>`
 ;
             var marker = new google.maps.Marker({
                 position: {lat: lati, lng: longi},
@@ -162,14 +162,12 @@ function load_attract(dict) {
 
             google.maps.event.addListener(marker, 'click', function(){
                 marker.setIcon(icon2);
-                    reviews_ajax(coordict).then((msg)=>{
-                        var ncontent_string = this.contentString
-                        var fullcontentstring = load_reviews(msg, ncontent_string)
-                        infowindow.setContent(fullcontentstring);
-                        infowindow.open(map, this);
-                        map.setCenter(this.position)
+                reviews_ajax(coordict).then((msg)=>{
+                  console.log(msg)
                 })
-
+                infowindow.setContent(this.contentString);
+                infowindow.open(map, this);
+                map.setCenter(this.position)
                 
             })
 
@@ -180,23 +178,6 @@ function load_attract(dict) {
 
     }
 };
-
-function load_reviews(arr, contentstring){
-    var infocontent = contentstring + "<div style='overflow-y:scroll; overflow-x: hidden;height:200px; width:300px;'>"
-    for(var i=0; i < arr.length; i++){
-        var author = arr[i].author
-        var review = arr[i].review
-        var date = arr[i].date
-        var revstring = `<h5>${author}</h5>` +
-            `<p>${review}<p>` +
-            `<p>${date}</p>`;
-        infocontent += revstring 
-    }
-    console.log(infocontent+ "</div>")
-    return(infocontent+ "</div>")
-
-}
-
 
 function show_rating_page(latitude, longitude){
     document.getElementById("reviewBG").style.display = "block";
@@ -402,6 +383,9 @@ function load_weather(dict){
     }
 }
 
+function load_reviews(dict){
+    console.log("hello")
+}
 
 function review_post_window(dict){
     
