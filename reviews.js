@@ -5,7 +5,6 @@ const ReviewSchema = mongoose.Schema({
     coor:String,
     author: String,
     review: String,
-    rating: String,
     date: String
 })
 
@@ -70,21 +69,26 @@ module.exports.database=function(dict, uri, action){
 
 
 
-/*
+
 var reviewstring = "THIS PLACE SUX"
 var uri = "mongodb+srv://Website:Gundam123@weatherhistory-cw0lw.mongodb.net/test?retryWrites=true";
-var mockdict = {coor:{latitude:"49", longitude: "-122"}, author: "Buttsman the great", review: "THIS PLACE SUX2", rating: 0, date:"2018-05-14"}
-var coor = {coor:{latitude:"50", longitude:"-1220"}}
+var mockdict = {coor:{latitude:"49", longitude: "-122"}, author: "Buttsman the great", review: "THIS PLACE SUX2", date:"2018-05-14"}
+var coor = {coor:{latitude:"49.28857109999999", longitude:"-123.142681"}}
+/*
+database(mockdict, uri, "add").then((item)=>{
+    console.log(item)
+}, (error) =>{
+    console.log(error)
+})
 */
 /*
-atabase(mockdict, uri, "add").then((item)=>{
+database(coor, uri, "test").then((item)=>{
     console.log(item)
+}, (error) =>{
+    console.log(error)
 })
-
-Database(coor, uri, "test").then((item)=>{
-    console.log(item)
-})
-
+*/
+/*
 database(coor, uri, "find").then((item)=>{
     console.log(item)
 })
@@ -113,8 +117,8 @@ function add_review(entry, model){
  * @return {object}            Contains all the info used to look up a point of interest
  */
 function lookup(model, searchcoor){
-    var searchcoor2 = JSON.stringify(searchcoor["coor"])
     return new Promise((resolve, reject)=>{
+        var searchcoor2 = JSON.stringify(searchcoor["coor"])
         model.find({coor:searchcoor2},function(err, info){
             if (err) reject(err);
             resolve(info)
