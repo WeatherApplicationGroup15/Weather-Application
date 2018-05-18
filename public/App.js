@@ -151,12 +151,19 @@ function load_attract(dict) {
             document.getElementById("attr"+i).addEventListener('click', function(){
                 marker.setIcon(icon2);
                 reviews_ajax(coordict).then((msg)=>{
-                  console.log(msg)
+                    var ncontent_string = marker.contentString
+                    var fullcontentstring = load_reviews(msg, ncontent_string)
+                    infowindow.setContent(fullcontentstring);
+                    infowindow.open(map, marker);
+                    map.setCenter(marker.position)
+                    map.setZoom(17);
                 })
+                /*
                 infowindow.setContent(ContentString);
                 infowindow.open(map, marker);
                 map.setCenter(marker.position)
                 map.setZoom(17);
+                */
                 
             })
 
@@ -217,9 +224,19 @@ document.getElementById("submitButton").addEventListener("click", function(){
     var coordict = {latitude: document.getElementById("lat").innerHTML, longitude: document.getElementById("lng").innerHTML}
     requestdict["coor"] = coordict
     requestdict["author"] = document.getElementById("author").value
+    document.getElementById("author").value = ""
     requestdict["review"] = document.getElementById("reviewinput").value
+    document.getElementById("reviewinput").value = ""
     requestdict["date"] = get_date()
+    document.getElementById("reviewBG").style.display = "none";
+    reviewBG = document.getElementById("reviewBG")
     reviews_ajax(requestdict)
+})
+
+document.getElementById("cancelButton").addEventListener("click", function(){
+    reviewBG.style.display = "none"
+    document.getElementById("author").value = ""
+    document.getElementById("reviewinput").value = ""
 })
 
 function get_date(){
@@ -503,12 +520,6 @@ closeRev = document.getElementById("cancelButton")
 reviewBG = document.getElementById("reviewBG")
 closeRev.addEventListener("click", function(){
     reviewBG.style.display = "none"
-})
-
-openReview = document.getElementById("sides")
-openReview.addEventListener("click", function(){
-    console.log("hello")
-    reviewBG.style.display = "block"
 })
 
 
