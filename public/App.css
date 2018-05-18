@@ -192,7 +192,7 @@ body {
 
 #pic1, #pic2, #pic3, #pic4, #pic5 {
     position: relative;
-    width: 80vh;
+    width: 30vw;
     height: auto;
     object-fit: contain;
 }
