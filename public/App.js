@@ -1,11 +1,16 @@
 /**
- * Functions for turning the loading screen on and off.
+ * Function to load and display the loading screen.
  */
 function load(){
     document.getElementById("loadScreen").style.display = "block";
     document.getElementById("news").style.display = "none";
     document.getElementById("weather").style.display = "none";
 }
+
+
+/**
+ * Function to load and display the BCIT tours main page.
+ */
 function unload(){
     document.getElementById("loadScreen").style.display = "none";
     document.getElementById("news").style.display = "block";
@@ -50,7 +55,7 @@ function geo() {
         google.maps.event.addDomListener(window, 'load', theMap(homecoor["lat"], homecoor["long"]));
     }
     /**
-     * error message
+     * Displays and error message if location can't be retrieved.
      */
     function error() {
         msg = document.getElementById("msg");
@@ -188,6 +193,12 @@ function load_attract(dict) {
     }
 };
 
+
+/**
+ * Function that loads the reviews for the points of interest selected.
+ * @param  {array} arr           array containing all the reviews based on filter selected.
+ * @param  {string} contentstring contains the review of the point of interest selected
+ */
 function load_reviews(arr, contentstring){
     var infocontent = contentstring + "<div style='overflow-y:scroll; overflow-x: hidden;height:200px; width:300px;'>"
     for(var i=0; i < arr.length; i++){
@@ -205,6 +216,11 @@ function load_reviews(arr, contentstring){
 }
 
 
+/**
+ * Function that hows the rating page based on the point of interest selected
+ * @param  {string} latitude  latitude of the point of interest selected
+ * @param  {string} longitude longitude of the point of interest selected
+ */
 function show_rating_page(latitude, longitude){
     document.getElementById("reviewBG").style.display = "block";
     document.getElementById("lat").innerHTML = latitude
@@ -212,6 +228,9 @@ function show_rating_page(latitude, longitude){
 }
 
 
+/**
+ * Function that resets the list of nearby points of interest when a new location is searched.
+ */
 function reset_attr(){
     var ndiv = document.createElement("h2")
     ndiv.className = "el-head"
@@ -239,6 +258,11 @@ document.getElementById("cancelButton").addEventListener("click", function(){
     document.getElementById("reviewinput").value = ""
 })
 
+
+/**
+ * Function that is used to obtain the date
+ * @return {string} date in yyyy-mm-dd format.
+ */
 function get_date(){
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -297,6 +321,11 @@ $(function() {
     })
 })
 
+
+/**
+ * Function to search for location using ajax
+ * @param  {string} search location to be searched for 
+ */
 function location_search_ajax(search){
     $.ajax({
             type: 'POST',
@@ -321,6 +350,11 @@ function location_search_ajax(search){
     })
 }
 
+
+/**
+ * Function used to obtain the reviews using ajax
+ * @param  {string} search review that is to be displayed
+ */
 function reviews_ajax(search){
     // search must be formatted as
     // {coor: {latitude: lat, longitude, long}}
