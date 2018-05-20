@@ -122,15 +122,6 @@ function promise_hell(request, response){
         }})
 }
 
-
-/**
- * Appends list into search.json.
- * @param {array} list - writes a list object into a json file.
- */
-function write_file(list) {
-    fs.writeFileSync("search.json", JSON.stringify(list));
-};
-
 /**
  * Reads the json file containing the API keys used in the website
  * @return {array} Array containing all the API keys used.
@@ -138,10 +129,6 @@ function write_file(list) {
 function get_keys() {
     file = fs.readFileSync("Apikeys.json")
     return JSON.parse(file)
-}
-
-function callback_hell(){
-    
 }
 
 /**
