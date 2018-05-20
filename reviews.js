@@ -67,34 +67,6 @@ module.exports.database=function(dict, uri, action){
     })
 }
 
-
-
-
-var reviewstring = "THIS PLACE SUX"
-var uri = "mongodb+srv://Website:Gundam123@weatherhistory-cw0lw.mongodb.net/test?retryWrites=true";
-var mockdict = {coor:{latitude:"49", longitude: "-122"}, author: "Buttsman the great", review: "THIS PLACE SUX2", date:"2018-05-14"}
-var coor = {coor:{latitude:"49.28857109999999", longitude:"-123.142681"}}
-/*
-database(mockdict, uri, "add").then((item)=>{
-    console.log(item)
-}, (error) =>{
-    console.log(error)
-})
-*/
-/*
-database(coor, uri, "test").then((item)=>{
-    console.log(item)
-}, (error) =>{
-    console.log(error)
-})
-*/
-/*
-database(coor, uri, "find").then((item)=>{
-    console.log(item)
-})
-*/
-
-
 /**
  * Function used that lets the user add a review to the point of interest selected.
  * @param {string} entry review the user can make
