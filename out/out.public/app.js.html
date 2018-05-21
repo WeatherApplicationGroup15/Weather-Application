@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: app.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Function to load and display the loading screen.
  */
 function load(){
@@ -115,7 +143,7 @@ function load_attract(dict) {
     var icon1 = "imgs/marker1s.png"
     var icon2 = "imgs/marker2s.png";
 
-    for(var i=min; i<max+1; i++) {
+    for(var i=min; i&lt;max+1; i++) {
         (function(){
             var place = dict["place"+i]
             lati = place.geometry["lat"]
@@ -124,10 +152,10 @@ function load_attract(dict) {
             var placerating = place["rating"]
             var address = place["address"]
             var coordict = {query:{coor:{latitude: lati, longitude: longi}}, task:"get_ratings"}
-            var ContentString = `<h6>${placename}</h6>`+
-                `<h5>${placerating+"★"}</h5>` +
-                `<p>${address}</p>` +
-                `<button onclick='show_rating_page(${lati},${longi})'>Post Review</button><br>`
+            var ContentString = `&lt;h6>${placename}&lt;/h6>`+
+                `&lt;h5>${placerating+"★"}&lt;/h5>` +
+                `&lt;p>${address}&lt;/p>` +
+                `&lt;button onclick='show_rating_page(${lati},${longi})'>Post Review&lt;/button>&lt;br>`
 ;
             var marker = new google.maps.Marker({
                 position: {lat: lati, lng: longi},
@@ -148,7 +176,7 @@ function load_attract(dict) {
             var ndiv = document.createElement("div")
             ndiv.setAttribute("id","attr"+i)
             ndiv.className = "attrBox"
-            ndiv.innerHTML = "<b>" + placename + "</b> <br> " + address
+            ndiv.innerHTML = "&lt;b>" + placename + "&lt;/b> &lt;br> " + address
             document.getElementById("attract").appendChild(ndiv)
 
             document.getElementById("attr"+i).addEventListener('click', function(){
@@ -198,18 +226,18 @@ function load_attract(dict) {
  * @param  {string} contentstring contains the review of the point of interest selected
  */
 function load_reviews(arr, contentstring){
-    var infocontent = contentstring + "<div style='overflow-y:scroll; overflow-x: hidden;height:200px; width:300px;'>"
-    for(var i=0; i < arr.length; i++){
+    var infocontent = contentstring + "&lt;div style='overflow-y:scroll; overflow-x: hidden;height:200px; width:300px;'>"
+    for(var i=0; i &lt; arr.length; i++){
         var author = arr[i].author
         var review = arr[i].review
         var date = arr[i].date
-        var revstring = `<h5>${author}</h5>` +
-            `<p>${review}<p>` +
-            `<p>${date}</p>`;
+        var revstring = `&lt;h5>${author}&lt;/h5>` +
+            `&lt;p>${review}&lt;p>` +
+            `&lt;p>${date}&lt;/p>`;
         infocontent += revstring 
     }
-    console.log(infocontent+ "</div>")
-    return(infocontent+ "</div>")
+    console.log(infocontent+ "&lt;/div>")
+    return(infocontent+ "&lt;/div>")
 
 }
 
@@ -433,7 +461,7 @@ function load_news(dict) {
  * @param  {Array} dict Contains the weather info.
  */
 function load_weather(dict){
-    for(var i = 0; i<5; i++){
+    for(var i = 0; i&lt;5; i++){
         var day = i + 1,
             w_month = new Date(),
             w_date = new Date(),
@@ -494,12 +522,12 @@ function showSlides() {
     var i;
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
+    for (i = 0; i &lt; slides.length; i++) {
         slides[i].style.display = "none";
     }
     slideIndex++;
     if (slideIndex > slides.length) { slideIndex = 1 }
-    for (i = 0; i < dots.length; i++) {
+    for (i = 0; i &lt; dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
     slides[slideIndex - 1].style.display = "block";
@@ -591,3 +619,26 @@ function FilterText(){
         document.getElementById("searchFilter").innerHTML = "Restaurants ⯆";
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeRev">closeRev</a></li><li><a href="global.html#dayList">dayList</a></li><li><a href="global.html#FilterText">FilterText</a></li><li><a href="global.html#geo">geo</a></li><li><a href="global.html#get_date">get_date</a></li><li><a href="global.html#get_radial">get_radial</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#load_attract">load_attract</a></li><li><a href="global.html#load_bg">load_bg</a></li><li><a href="global.html#load_news">load_news</a></li><li><a href="global.html#load_reviews">load_reviews</a></li><li><a href="global.html#load_weather">load_weather</a></li><li><a href="global.html#loadinfo">loadinfo</a></li><li><a href="global.html#location_search_ajax">location_search_ajax</a></li><li><a href="global.html#monthList">monthList</a></li><li><a href="global.html#reset_attr">reset_attr</a></li><li><a href="global.html#reviews_ajax">reviews_ajax</a></li><li><a href="global.html#show_rating_page">show_rating_page</a></li><li><a href="global.html#showSlides">showSlides</a></li><li><a href="global.html#sub">sub</a></li><li><a href="global.html#theMap">theMap</a></li><li><a href="global.html#unload">unload</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 20 2018 17:06:55 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
