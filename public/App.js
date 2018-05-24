@@ -329,7 +329,7 @@ function location_search_ajax(search){
             type: 'POST',
             data: JSON.stringify(search),
             contentType: 'application/json',
-            url: 'http://localhost:8080/',
+            url: '/',
             success: function(data) {
                 console.log('success');
                 var returned = JSON.parse(JSON.stringify(data))
@@ -361,7 +361,7 @@ function reviews_ajax(search){
             type: 'POST',
             data: JSON.stringify(search),
             contentType: 'application/json',
-            url: 'http://localhost:8080/',
+            url: '/',
             success: function(data){
                 console.log("successfully got review data")
                 var returned = JSON.parse(data)
