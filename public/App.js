@@ -90,7 +90,9 @@ function theMap(lati, longi) {
  * @param  {array} dict List of the attractions
  */
 function load_attract(dict) {
-    reset_attr()
+    var len = Object.keys(dict).length
+    if (len != 0){
+        reset_attr()
     var min = 1, max = Object.keys(dict).length
     var lati = dict.place1.geometry["lat"],
         longi = dict.place1.geometry["lng"]
@@ -188,7 +190,12 @@ function load_attract(dict) {
             });
         }());
 
+        }
     }
+    else{
+        alert("no places")
+    }
+    
 };
 
 
@@ -334,6 +341,7 @@ function location_search_ajax(search){
                 console.log('success');
                 var returned = JSON.parse(JSON.stringify(data))
                 returned = JSON.parse(data)
+                console.log(returned["places"])
                 console.log(returned)
                 if (returned["error"] === "None"){
                     google.maps.event.addDomListener(window, 'load', theMap(returned.location['lat'], returned.location['long']));
