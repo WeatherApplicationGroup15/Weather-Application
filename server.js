@@ -1,3 +1,4 @@
+const port = process.env.port || 8080;
 const express = require('express');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
@@ -10,10 +11,11 @@ const forecast = require("./5days.js")
 const pixabay = require("./pixabay.js")
 const places = require("./attract.js")
 const reviews = require("./reviews.js")
+require('dotenv').config();
 
 var uri = "mongodb+srv://Website:Gundam123@weatherhistory-cw0lw.mongodb.net/test?retryWrites=true";
 
-const keys = get_keys()
+const keys = process.env
 /**
  * Variable used to use express() module
  * @type {object}
@@ -122,18 +124,22 @@ function promise_hell(request, response){
         }})
 }
 
+
 /**
- * Reads the json file containing the API keys used in the website
- * @return {array} Array containing all the API keys used.
+ * Appends list into search.json.
+ * @param {array} list - writes a list object into a json file.
  */
-function get_keys() {
-    file = fs.readFileSync("Apikeys.json")
-    return JSON.parse(file)
+function write_file(list) {
+    fs.writeFileSync("search.json", JSON.stringify(list));
+};
+
+function callback_hell(){
+    
 }
 
 /**
  * Makes the server accessable via an internet browser.
  */
-app.listen(8080, () => {
-    console.log('server is up on port 8080');
+app.listen(process.env.PORT || 8080, () => {
+    console.log(`server is up on port ${port}`);
 });

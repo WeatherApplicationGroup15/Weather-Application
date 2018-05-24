@@ -1,6 +1,5 @@
 /node_modules
 search.json
-package.json
-package-lock.json
 Apikeys.json
 apikeywriter.js
+.env
